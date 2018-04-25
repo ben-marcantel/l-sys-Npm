@@ -1,0 +1,24 @@
+{
+  "name": "l-sys-Npm",
+  "version": "1.0.0",
+  "description": "practice using l-system npm",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ben-marcantel/l-sys-Npm.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ben-marcantel/l-sys-Npm/issues"
+  },
+  "homepage": "https://github.com/ben-marcantel/l-sys-Npm#readme",
+  "dependencies": {
+    "browserify": "^16.2.0",
+    "lindenmayer": "^1.3.6"
+  }
+}
