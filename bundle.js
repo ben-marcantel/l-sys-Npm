@@ -2,7 +2,10 @@
 var canvas = document.getElementById('canvas')
 var ctx = canvas.getContext("2d")
 const LSystem = require('lindenmayer');
+
+
 // translate to center of canvas
+
 ctx.translate(canvas.width * 0.8, canvas.height / 15)
 let counter=0;
 let initNum;
@@ -45,49 +48,59 @@ const setConditional2 = ()=>{
     }else {
         ctx.rotate((Math.PI/180) * -50) 
     }
-    console.log("current",initNum)
+    console.log("current2",initNum)
 }
 
 let koch = new LSystem({
-  axiom: 'F++F++F',
-  productions: {'F': 'F-F++F-F'},
+  axiom: 'X-[X]',
+  productions: {'F': 'FF', 'X':'F[-X]-[X][-X]+FX'},
   finals: {
-    '+': () => { setConditional(); ctx.closePath(); },
-    '-': () => { setConditional() },
+    //   'X':()=>{ 
+    //        ctx.translate(canvas.width / 2, canvas.height / 4)
+    //     ctx.beginPath();
+    //     ctx.moveTo(0,0);
+    //     ctx.lineTo(0, 40/(koch.iterations + 1));
+    //     ctx.stroke();
+    //     ctx.translate(0, 40/(koch.iterations + 1));},
+    '+': () => {randomNum(); setConditional2() },
+    '-': () => { randomNum();setConditional() },
     'F': () => {
-      ctx.beginPath()
-      ctx.moveTo(0,0)
-      ctx.lineTo(0, 380/(koch.iterations + 1))
+        // ctx.translate(canvas.width / 2, canvas.height / 4)
+        // ctx.beginPath();
+        // ctx.moveTo(0,0);
+        // ctx.lineTo(0, 40/(koch.iterations + 1));
+        // ctx.stroke();
+        // ctx.translate(0, 40/(koch.iterations + 1));
+    // },
+      ctx.beginPath();
+      ctx.moveTo(0,0);
+    //   ctx.lineTo(10,20)
+    //   ctx.lineTo(10,0);
+      ctx.lineTo(0, 25/(koch.iterations + 1));
+    //   ctx.lineTo(0, -35/(koch.iterations - 1));      
       ctx.shadowColor = 'red';
       ctx.shadowBlur = 70;     
       ctx.strokeStyle = "red";
-      ctx.stroke()      
-      ctx.translate(0, 380/(koch.iterations + 1))}
+      ctx.stroke();      
+      ctx.translate(0, 25/(koch.iterations + 1))},
+    '[': ()=>{ ctx.save()},
+    ']':()=>{ctx.restore()}
+    // '[': ()=>{ },
+    // ']':()=>{}
    }
 })
-randomNum()
-koch.iterate(4)
+// randomNum()
+koch.iterate(5)
+// koch.iterate(3)
+
 koch.final()
+// koch.iterate(5)
+// koch.final()
+
+
 console.log(koch.getString())
 
-// setTimeout(function(){ koch.final() }, 3000);
-// const scene = (counter)=>{
 
-//     if (counter !== 25){
-//          animate();
-//      } else if (counter === 25){
-//         clearTimeout(animate);
-//      } 
-//  }
- 
-//  const animate = ()=>{ 
-//      setTimeout(()=>{
-//          counter += 1;
-//          koch.final();
-//          scene(counter);
-//      },3000)
-//  }
-//  animate();
 
 },{"lindenmayer":2}],2:[function(require,module,exports){
 'use strict';
